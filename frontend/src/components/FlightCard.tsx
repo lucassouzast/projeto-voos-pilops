@@ -1,4 +1,4 @@
-import { Box, Typography, Card, Stack } from "@mui/material";
+import { Box, Typography, Card, Stack, Grid } from "@mui/material";
 import type { Flight } from "../types/flight";
 import CircleIcon from "@mui/icons-material/Circle";
 
@@ -19,46 +19,47 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                mb: 3,
             }}
         >
             <Card
                 sx={{
                     width: "100%",
-                    maxWidth: 1147,
+                    maxWidth: 1200,
                     minHeight: 94,
                     borderRadius: "5px",
                     border: "1px solid #444444",
                     p: 3,
                     backgroundColor: "#212121",
                     color: "white",
-                    display: "flex",
-                    alignItems: "center",
                     gap: 3,
                 }}
             >
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        width: "100%",
-                    }}
-                >
-                    <Box sx={{ minWidth: 150 }}>
-                        <Typography variant="h5" fontWeight="bold">
-                            Boeing 737-800
-                            {/* {flight.aircraft.name} */}
+                <Grid container spacing={8} justifyContent="space-around">
+                    <Grid size={3}>
+                        <Typography
+                            variant="h5"
+                            sx={{
+                                fontFamily: "Manrope",
+                                fontWeight: 600,
+                                fontSize: "16px",
+                                lineHeight: "140%",
+                                letterSpacing: 0,
+                                whiteSpace: "nowrap"
+                            }}
+                        >
+                            {flight.aircraft.name}
                         </Typography>
+
                         <Typography
                             variant="body2"
                             color="text.secondary"
                             sx={{ color: "#aaa" }}
                         >
-                            Gol Linhas Aéreas (GOL)
-                            {/* {flight.aircraft.airline} */}
+                            {flight.aircraft.airline}
                         </Typography>
-                    </Box>
-                    <Box sx={{ textAlign: "center", mx: 4, flexShrink: 0 }}>
+                    </Grid>
+                    <Grid size={2}>
                         <Stack alignItems="center">
                             <Typography
                                 variant="caption"
@@ -122,8 +123,8 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                                 </Typography>
                             </Stack>
                         </Stack>
-                    </Box>
-                    <Box sx={{ textAlign: "center" }}>
+                    </Grid>
+                    <Grid size={1}>
                         <Typography
                             variant="caption"
                             color="text.secondary"
@@ -141,12 +142,11 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                                 whiteSpace: "nowrap",
                             }}
                         >
-                            PR-000
-                            {/* {flight.id} */}
+                            {flight.id}
                         </Typography>
-                    </Box>
+                    </Grid>
 
-                    <Box sx={{ textAlign: "center" }}>
+                    <Grid size={1}>
                         <Typography
                             variant="caption"
                             color="text.secondary"
@@ -160,16 +160,14 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                                 fontWeight: 600,
                                 fontSize: "16px",
                                 letterSpacing: 0,
-                                textAlign: "center",
                                 whiteSpace: "nowrap",
                             }}
                         >
-                            15/07/2025
-                            {/* {flight.flightData.date} */}
+                            {flight.flightData.date}
                         </Typography>
-                    </Box>
+                    </Grid>
 
-                    <Box sx={{ textAlign: "center" }}>
+                    <Grid size={1.5}>
                         <Typography
                             variant="caption"
                             color="text.secondary"
@@ -182,11 +180,10 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                             fontWeight="bold"
                             sx={{ color: "#2ecc71", whiteSpace: "nowrap" }}
                         >
-                            {/* {flight.flightData.balance} */}
-                            R$ 5.000,00
+                            {flight.flightData.balance}
                         </Typography>
-                    </Box>
-                </Box>
+                    </Grid>
+                </Grid>
             </Card>
         </Box>
     );
