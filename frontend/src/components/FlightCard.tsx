@@ -45,7 +45,7 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                                 fontSize: "16px",
                                 lineHeight: "140%",
                                 letterSpacing: 0,
-                                whiteSpace: "nowrap"
+                                whiteSpace: "nowrap",
                             }}
                         >
                             {flight.aircraft.name}
@@ -146,10 +146,17 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                         </Typography>
                     </Grid>
 
-                    <Grid size={1}>
+                    <Grid
+                        size={1}
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        flexDirection="column"
+                    >
                         <Typography
                             variant="caption"
                             color="text.secondary"
+                            alignContent={"center"}
                             sx={{ color: "#aaa", whiteSpace: "nowrap" }}
                         >
                             Data
@@ -158,16 +165,25 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                             sx={{
                                 ...textBase,
                                 fontWeight: 600,
-                                fontSize: "16px",
-                                letterSpacing: 0,
-                                whiteSpace: "nowrap",
                             }}
                         >
-                            {flight.flightData.date}
+                            {new Date(
+                                flight.flightData.date
+                            ).toLocaleDateString("pt-BR", {
+                                day: "2-digit",
+                                month: "2-digit",
+                                year: "numeric",
+                            })}
                         </Typography>
                     </Grid>
 
-                    <Grid size={1.5}>
+                    <Grid
+                        size={1.5}
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        flexDirection="column"
+                    >
                         <Typography
                             variant="caption"
                             color="text.secondary"
@@ -178,9 +194,18 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                         <Typography
                             variant="subtitle1"
                             fontWeight="bold"
-                            sx={{ color: "#2ecc71", whiteSpace: "nowrap" }}
+                            sx={{
+                                color:
+                                    flight.flightData.balance < 0
+                                        ? "#FF0000"
+                                        : "#00FF88",
+                                whiteSpace: "nowrap",
+                            }}
                         >
-                            {flight.flightData.balance}
+                            {flight.flightData.balance >= 0 ? `P$ ` : `- P$ `}
+                            {` ${Math.abs(flight.flightData.balance).toFixed(
+                                2
+                            )}`}
                         </Typography>
                     </Grid>
                 </Grid>
