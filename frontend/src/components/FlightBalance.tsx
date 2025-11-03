@@ -5,16 +5,14 @@ import { Box, Typography } from "@mui/material";
 export const FlightBalance = () => {
     const [totalBalance, setTotalBalance] = useState(0);
 
-    const getTotalBalance = () => {
-        api.get("/flights/balance").then((response) => {
-            setTotalBalance(
-                response.data.totalBalance.toLocaleString("pt-BR", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                })
-            );
-        });
-    };
+const getTotalBalance = async () => {
+  try {
+    const response = await api.get("/flights/balance");
+    setTotalBalance(response.data.totalBalance);
+  } catch (error) {
+    console.error("Erro ao buscar saldo:", error);
+  }
+};
     useEffect(() => {
         getTotalBalance();
     }, []);
@@ -34,8 +32,17 @@ export const FlightBalance = () => {
             boxShadow={0}
         >
             <Typography variant="caption">Saldo Total</Typography>
-            <Typography variant="h5" sx={{ fontWeight: 700, mt: 0.5 }}>
-                P$ {totalBalance}
+            <Typography
+                variant="h5"
+                sx={{
+                    fontWeight: 700,
+                    mt: 0.5,
+                }}
+            >
+                {`P$ ${totalBalance.toLocaleString("pt-BR", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                })}`}
             </Typography>
         </Box>
     );
