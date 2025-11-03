@@ -129,6 +129,7 @@ export const RewardsCard = ({ flight }: FlightCardProps) => {
                                             fontSize: "32px",
                                             lineHeight: "110%",
                                             letterSpacing: 0,
+                                            color:"#fff"
                                         }}
                                     >
                                         {flight.flightData.xp}
