@@ -38,3 +38,11 @@ export const getFlightById = (req: Request, res: Response) => {
         return res.status(500).json({ message: 'Erro ao carregar voo.' });
     }
         }
+
+
+export const getAllFlightsBalance = (req: Request, res:Response) => {
+    const {flights: flightsBalance } = flightsData;
+
+    const totalBalance = flightsBalance.reduce((acc, f) => acc + f.flightData.balance, 0);
+    return res.status(200).json({totalBalance});
+}
