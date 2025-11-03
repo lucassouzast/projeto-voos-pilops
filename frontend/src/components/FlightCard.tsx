@@ -10,9 +10,10 @@ const textBase = {
 
 interface FlightCardProps {
     flight: Flight;
+    showBalance?: boolean;
 }
 
-export const FlightCard = ({ flight }: FlightCardProps) => {
+export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
     return (
         <Box
             sx={{
@@ -32,10 +33,9 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                     p: 3,
                     backgroundColor: "#212121",
                     color: "white",
-                    gap: 3,
                 }}
             >
-                <Grid container spacing={8} justifyContent="space-around">
+                <Grid container spacing={6} justifyContent="space-between">
                     <Grid size={3}>
                         <Typography
                             variant="h5"
@@ -69,6 +69,7 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                                     fontSize: "12px",
                                     letterSpacing: 0,
                                     textAlign: "center",
+                                    color: "#aaa",
                                 }}
                             >
                                 Trajeto
@@ -111,7 +112,7 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                                     fontFamily={"Manrope"}
                                     fontSize={16}
                                 >
-                                    SBVT
+                                    {flight.flightData.route.from}
                                 </Typography>
                                 <Typography
                                     sx={{ color: "#fff", lineHeight: 1 }}
@@ -119,7 +120,7 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                                     fontFamily={"Manrope"}
                                     fontSize={16}
                                 >
-                                    SBSP
+                                    {flight.flightData.route.to}
                                 </Typography>
                             </Stack>
                         </Stack>
@@ -147,7 +148,7 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                     </Grid>
 
                     <Grid
-                        size={1}
+                        size={2}
                         display="flex"
                         justifyContent="center"
                         alignItems="center"
@@ -177,37 +178,44 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                         </Typography>
                     </Grid>
 
-                    <Grid
-                        size={1.5}
-                        display="flex"
-                        justifyContent="center"
-                        alignItems="center"
-                        flexDirection="column"
-                    >
-                        <Typography
-                            variant="caption"
-                            color="text.secondary"
-                            sx={{ color: "#aaa", whiteSpace: "nowrap" }}
+                    {showBalance && (
+                        <Grid
+                            size={1.5}
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                            flexDirection="column"
                         >
-                            Saldo
-                        </Typography>
-                        <Typography
-                            variant="subtitle1"
-                            fontWeight="bold"
-                            sx={{
-                                color:
-                                    flight.flightData.balance < 0
-                                        ? "#FF0000"
-                                        : "#00FF88",
-                                whiteSpace: "nowrap",
-                            }}
-                        >
-                            {flight.flightData.balance >= 0 ? `P$ ` : `- P$ `}
-                            {` ${Math.abs(flight.flightData.balance).toFixed(
-                                2
-                            )}`}
-                        </Typography>
-                    </Grid>
+                            <Typography
+                                variant="caption"
+                                color="text.secondary"
+                                alignContent={"center"}
+                                sx={{ color: "#aaa", whiteSpace: "nowrap" }}
+                            >
+                                Saldo
+                            </Typography>
+                            <Typography
+                                variant="subtitle1"
+                                fontWeight="bold"
+                                sx={{
+                                    color:
+                                        flight.flightData.balance < 0
+                                            ? "#FF0000"
+                                            : "#00FF88",
+                                    whiteSpace: "nowrap",
+                                }}
+                            >
+                                {flight.flightData.balance < 0 ? "- " : ""}
+                                P${" "}
+                                {Math.abs(
+                                    flight.flightData.balance
+                                ).toLocaleString("pt-BR", {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                })}
+                            </Typography>
+                        </Grid>
+                    )}
                 </Grid>
             </Card>
         </Box>
