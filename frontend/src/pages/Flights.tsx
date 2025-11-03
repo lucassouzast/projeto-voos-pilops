@@ -6,6 +6,9 @@ import { api } from "../services/api";
 import { SectionHeader } from "../components/SectionHeader";
 import { Box } from "@mui/material";
 
+import { useNavigate } from "react-router-dom";
+
+
 export const Flights = () => {
     useEffect(() => {
         getFlights();
@@ -17,6 +20,7 @@ export const Flights = () => {
     };
 
     const [flightsList, setFlightsList] = useState<Flight[]>([]);
+    const navigate = useNavigate();
 
     return (
         <>
@@ -25,7 +29,9 @@ export const Flights = () => {
             <div>
                 <SectionHeader />
                 {flightsList.map((flight) => (
-                    <FlightCard key={flight.id} flight={flight} />
+                    <div key={flight.id} onClick={()=> navigate(`/flights/${flight.id}`, {state: flight})} style={{cursor: 'pointer'}}>
+                        <FlightCard key={flight.id} flight={flight} />
+                    </div>
                 ))}
             </div>
         </Box>
