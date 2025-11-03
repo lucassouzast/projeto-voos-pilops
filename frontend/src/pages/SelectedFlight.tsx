@@ -10,10 +10,13 @@ import { RewardsCard } from "../components/RewardsCard";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Box, Typography } from "@mui/material";
 
+import { useNavigate } from "react-router-dom";
+
 export const SelectedFlight = () => {
     const { id } = useParams();
     const location = useLocation();
     const [flight, setFlight] = useState<Flight | null>(location.state || null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!flight) {
@@ -39,8 +42,9 @@ export const SelectedFlight = () => {
             <PilopsLogo />
             <Box
                 sx={{ maxWidth: "1200px", display: "flex"}}
-            >
-                <ArrowBackIosIcon />
+            >   <div onClick={()=> navigate (-1)} style={{cursor: 'pointer'}}>
+                    <ArrowBackIosIcon />
+                </div>
                 <Typography
                     sx={{
                         fontFamily: "Sora, sans-serif",
