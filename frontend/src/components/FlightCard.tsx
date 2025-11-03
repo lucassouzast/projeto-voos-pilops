@@ -36,9 +36,8 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                 }}
             >
                 <Grid container spacing={6} justifyContent="space-between">
-                    <Grid size={3}>
+                    <Grid size={2}>
                         <Typography
-                            variant="h5"
                             sx={{
                                 fontFamily: "Manrope",
                                 fontWeight: 600,
