@@ -1,16 +1,11 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
 import { api } from "../services/api";
 import type { Flight } from "../types/flight";
-
 import { PilopsLogo } from "../components/PilopsLogo";
 import { RewardsCard } from "../components/RewardsCard";
-
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { Box, Typography } from "@mui/material";
-
-import { useNavigate } from "react-router-dom";
+import { Box, Typography, Skeleton } from "@mui/material";
 
 export const SelectedFlight = () => {
     const { id } = useParams();
@@ -20,13 +15,41 @@ export const SelectedFlight = () => {
 
     useEffect(() => {
         if (!flight) {
-            api.get(`/flights/${id}`).then((response) => {
-                setFlight(response.data.flight);
-            });
+            api.get(`/flights/${id}`)
+                .then((response) => {
+                    const flightData = response.data.flight || response.data;
+                    setFlight(flightData);
+                })
+                .catch((err) => console.error("Erro ao buscar voo:", err));
         }
     }, [id, flight]);
 
-    if (!flight) return <div>Carregando...</div>;
+    if (!flight) {
+        return (
+            <Box
+                sx={{
+                    maxWidth: "1200px",
+                    mx: "auto",
+                    px: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 2,
+                }}
+            >
+                <PilopsLogo />
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <Skeleton variant="circular" width={24} height={24} />
+                    <Skeleton variant="text" width={180} height={32} />
+                </Box>
+
+                <Skeleton
+                    variant="rectangular"
+                    height={250}
+                    sx={{ borderRadius: 2 }}
+                />
+            </Box>
+        );
+    }
 
     return (
         <Box
@@ -40,9 +63,11 @@ export const SelectedFlight = () => {
             }}
         >
             <PilopsLogo />
-            <Box
-                sx={{ maxWidth: "1200px", display: "flex"}}
-            >   <div onClick={()=> navigate (-1)} style={{cursor: 'pointer'}}>
+            <Box sx={{ maxWidth: "1200px", display: "flex" }}>
+                <div
+                    onClick={() => navigate("/")}
+                    style={{ cursor: "pointer" }}
+                >
                     <ArrowBackIosIcon />
                 </div>
                 <Typography
