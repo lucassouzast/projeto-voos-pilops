@@ -1,15 +1,46 @@
-import Logo from '../assets/PilopsLogo.svg'
-import {Box, Typography} from '@mui/material'
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+
 export const SectionHeader = () => {
     return (
         <Box
-        display='flex'
-        flexDirection='column'
-        alignItems='center'
-        textAlign='center'
-        sx={{py:4}}
+            mb={4}
+            component="header"
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                mb: 3,
+            }}
         >
-         <img src={Logo} alt="Pilops Logo" width={200} />
-         <Typography variant='subtitle2' sx={{mt:2}} fontWeight={400} fontFamily={'Manrope'}>Your virtual pilot career for Flight Simulator</Typography>
+            <Typography
+                variant="h4"
+                component="h2"
+                gutterBottom
+                sx={{
+                    fontFamily: "Sora",
+                    fontWeight: 700,
+                    fontStyle: "normal",
+                    fontSize: "24px",
+                    lineHeight: "110%",
+                    letterSpacing: "0%",
+                }}
+            >
+                Histórico de Voos
+            </Typography>
+
+            <Typography
+                variant="body1"
+                sx={{
+                    fontFamily: "Sora",
+                    fontWeight: 400,
+                    fontStyle: "normal",
+                    fontSize: "18px",
+                    lineHeight: "110%",
+                    letterSpacing: "0%",
+                }}
+            >
+                Visualize seu histórico completo de voos realizados
+            </Typography>
         </Box>
-)}
+    );
+};
