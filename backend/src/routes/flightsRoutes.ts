@@ -4,7 +4,7 @@ import { getAllFlights, getAllFlightsBalance, getFlightById } from '../controlle
 const router = express.Router();
 
 router.get('/flights', getAllFlights);
-router.get('/flights/:id', getFlightById);
 router.get('/flights/balance', getAllFlightsBalance);
+router.get('/flights/:id', getFlightById);
 
 export default router;
