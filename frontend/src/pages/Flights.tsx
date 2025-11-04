@@ -20,12 +20,14 @@ export const Flights = () => {
 
     const getFlights = (page: number) => {
         setLoading(true);
-        api.get(`/flights?page=${page}`).then((response) => {
-            setFlightsList(response.data.flights);
-            setTotalPages(response.data.totalPages);
-        }).finally(() => {
-            setLoading(false);
-        });
+        api.get(`/flights?page=${page}`)
+            .then((response) => {
+                setFlightsList(response.data.flights);
+                setTotalPages(response.data.totalPages);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     useEffect(() => {
@@ -42,37 +44,45 @@ export const Flights = () => {
                         <FlightBalance />
                     </Box>
 
-                    {!loading 
-                        ? flightsList.map((flight) => (
-                              <div
-                                  key={flight.id}
-                                  onClick={() =>
-                                      navigate(`/flights/${flight.id}`, {
-                                          state: flight,
-                                      })
-                                  }
-                                  style={{ cursor: "pointer" }}
-                              >
-                                  <ButtonBase
-                                      sx={{
-                                          width: "100%",
-                                          display: "block",
-                                          overflow: "hidden",
-                                      }}
-                                  >
-                                      <FlightCard flight={flight} />
-                                  </ButtonBase>
-                              </div>
-                          ))
-                        : Array.from({ length: 5 }).map((_, index) => (
-                              <Skeleton
-                                  key={index}
-                                  variant="rectangular"
-                                  width="100%"
-                                  height={94}
-                                  sx={{ mb: 2 }}
-                              />
-                          ))}
+                    {!loading ? (
+                        flightsList.length > 0 ? (
+                            flightsList.map((flight) => (
+                                <div
+                                    key={flight.id}
+                                    onClick={() =>
+                                        navigate(`/flights/${flight.id}`, {
+                                            state: flight,
+                                        })
+                                    }
+                                    style={{ cursor: "pointer" }}
+                                >
+                                    <ButtonBase
+                                        sx={{
+                                            width: "100%",
+                                            display: "block",
+                                            overflow: "hidden",
+                                        }}
+                                    >
+                                        <FlightCard flight={flight} />
+                                    </ButtonBase>
+                                </div>
+                            ))
+                        ) : (
+                            <Box textAlign="center" py={5} color="gray">
+                                Nenhum voo encontrado.
+                            </Box>
+                        )
+                    ) : (
+                        Array.from({ length: 5 }).map((_, index) => (
+                            <Skeleton
+                                key={index}
+                                variant="rectangular"
+                                width="100%"
+                                height={94}
+                                sx={{ mb: 2 }}
+                            />
+                        ))
+                    )}
 
                     <Box display="flex" justifyContent="center" my={2}>
                         <Pagination
