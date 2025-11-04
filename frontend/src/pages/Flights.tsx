@@ -16,19 +16,22 @@ export const Flights = () => {
 
     const navigate = useNavigate();
 
+    const [loading, setLoading] = useState(true);
+
     const getFlights = (page: number) => {
+        setLoading(true);
         api.get(`/flights?page=${page}`).then((response) => {
             setFlightsList(response.data.flights);
             setTotalPages(response.data.totalPages);
+        }).finally(() => {
+            setLoading(false);
         });
     };
 
     useEffect(() => {
         getFlights(currentPage);
     }, [currentPage]);
-    useEffect(() => {
-        setCurrentPage(1);
-    }, []);
+
     return (
         <>
             <Box sx={{ maxWidth: "1200px", mx: "auto", px: 2 }}>
@@ -39,7 +42,7 @@ export const Flights = () => {
                         <FlightBalance />
                     </Box>
 
-                    {flightsList && flightsList.length > 0
+                    {!loading 
                         ? flightsList.map((flight) => (
                               <div
                                   key={flight.id}
@@ -51,12 +54,6 @@ export const Flights = () => {
                                   style={{ cursor: "pointer" }}
                               >
                                   <ButtonBase
-                                      key={flight.id}
-                                      onClick={() =>
-                                          navigate(`/flights/${flight.id}`, {
-                                              state: flight,
-                                          })
-                                      }
                                       sx={{
                                           width: "100%",
                                           display: "block",
