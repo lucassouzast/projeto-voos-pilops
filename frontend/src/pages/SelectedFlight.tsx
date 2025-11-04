@@ -17,8 +17,7 @@ export const SelectedFlight = () => {
         if (!flight) {
             api.get(`/flights/${id}`)
                 .then((response) => {
-                    const flightData = response.data.flight || response.data;
-                    setFlight(flightData);
+                    setFlight(response.data.flight);
                 })
                 .catch((err) => console.error("Erro ao buscar voo:", err));
         }

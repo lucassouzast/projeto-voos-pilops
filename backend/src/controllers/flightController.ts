@@ -33,7 +33,7 @@ export const getFlightById = (req: Request, res: Response) => {
         if (!flightById) {
             return res.status(404).json({ message: 'Voo não encontrado.' });
         } 
-        return res.status(200).json(flightById);
+        return res.status(200).json({flight:flightById});
     } catch (error) {
         return res.status(500).json({ message: 'Erro ao carregar voo.' });
     }
