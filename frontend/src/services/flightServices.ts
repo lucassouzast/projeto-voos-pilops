@@ -2,7 +2,7 @@ import { api } from "./api";
 
 export const getTotalBalance = async () => {
     try {
-        const response = await api.get("/flights/b2alance");
+        const response = await api.get("/flights/balance");
         return response.data.totalBalance;
     } catch (error) {
         console.error("Erro ao buscar saldo:", error);
