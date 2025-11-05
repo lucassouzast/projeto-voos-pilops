@@ -1,4 +1,4 @@
-import { Box, Alert } from "@mui/material";
+import { Box, Alert, Snackbar } from "@mui/material";
 
 interface ErrorAlertProps {
     error: boolean;
@@ -7,21 +7,11 @@ interface ErrorAlertProps {
 }
 
 export const ErrorAlert = ({ error, onClose, message }: ErrorAlertProps) => {
-    const defaultMessage = "Houve um problema no momento. Por favor, tente novamente mais tarde.";
+    const defaultMessage =
+        "Houve um problema no momento. Por favor, tente novamente mais tarde.";
 
     return (
-        <Box
-            sx={{
-                position: "fixed",
-                top: 2,
-                left: 0,
-                right: 0,
-                zIndex: 1300,
-                opacity: error ? 1 : 0,
-                visibility: error ? "visible" : "hidden",
-                transition: "opacity 0.6s ease-in-out",
-            }}
-        >
+        <Snackbar open={error} autoHideDuration={6000} onClose={onClose}>
             <Alert
                 variant="filled"
                 severity="error"
@@ -32,6 +22,6 @@ export const ErrorAlert = ({ error, onClose, message }: ErrorAlertProps) => {
             >
                 {message || defaultMessage}
             </Alert>
-        </Box>
+        </Snackbar>
     );
 };
