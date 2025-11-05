@@ -1,11 +1,12 @@
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { api } from "../services/api";
 import type { Flight } from "../types/flight";
 import { PilopsLogo } from "../components/PilopsLogo";
 import { RewardsCard } from "../components/RewardsCard";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Box, Typography, Skeleton } from "@mui/material";
+import { getFlightById } from "../services/flightServices";
+import { ErrorAlert } from "../components/ErrorAlert";
 
 export const SelectedFlight = () => {
     const { id } = useParams();
@@ -13,18 +14,43 @@ export const SelectedFlight = () => {
     const [flight, setFlight] = useState<Flight | null>(location.state || null);
     const navigate = useNavigate();
 
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+
+    const fetchFlight = async () => {
+        setLoading(true);
+        if (id) {
+            try {
+                const fetchedFlight = await getFlightById(id);
+                setFlight(fetchedFlight);
+                setLoading(false);
+            } catch (error) {
+                console.error("Erro ao buscar voo:", error);
+                setLoading(false);
+                setError(true);
+                setErrorMessage("Não foi possível carregar os detalhes do voo.");
+            }
+        }
+    };
+
     useEffect(() => {
         if (!flight) {
-            api.get(`/flights/${id}`)
-                .then((response) => {
-                    setFlight(response.data.flight);
-                })
-                .catch((err) => console.error("Erro ao buscar voo:", err));
+            fetchFlight();
+
+        } else {
+            setLoading(false);
         }
     }, [id, flight]);
 
-    if (!flight) {
+    const handleCloseError = () => {
+        setError(false);
+    }
+
+    if (!flight || loading) {
         return (
+            <>
+            <ErrorAlert error={error} message={errorMessage} onClose={handleCloseError}/>
             <Box
                 sx={{
                     maxWidth: "1200px",
@@ -34,7 +60,7 @@ export const SelectedFlight = () => {
                     flexDirection: "column",
                     gap: 2,
                 }}
-            >
+                >
                 <PilopsLogo />
                 <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                     <Skeleton variant="circular" width={24} height={24} />
@@ -45,8 +71,10 @@ export const SelectedFlight = () => {
                     variant="rectangular"
                     height={250}
                     sx={{ borderRadius: 2 }}
-                />
+                    />
             </Box>
+                    </>
+
         );
     }
 
