@@ -18,7 +18,7 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
         <Box
             sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "space-between",
                 alignItems: "center",
                 mb: 3,
             }}
@@ -26,7 +26,7 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
             <Card
                 sx={{
                     width: "100%",
-                    maxWidth: 1200,
+                    maxWidth: 1147,
                     minHeight: 94,
                     borderRadius: "5px",
                     border: "1px solid #444444",
@@ -39,10 +39,8 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                     container
                     spacing={{ xs: 2, md: 4 }}
                     justifyContent={{ xs: "flex-start", md: "space-between" }}
-                    columns={{md:12, xs:12} }
-                    
                 >
-                    <Grid size={{ xs: 12, md: 3, sm: 12}}>
+                    <Grid size={{ xs: showBalance ? 12 : 6, md: 3, sm: 12 }}>
                         <Typography
                             sx={{
                                 fontFamily: "Manrope",
@@ -131,11 +129,15 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                             </Stack>
                         </Stack>
                     </Grid>
-                    <Grid size={{ xs: 6, md: 1.5, sm:3 }}>
+                    <Grid size={{ xs: 6, md: 1.5, sm: 3 }}>
                         <Typography
                             variant="caption"
                             color="text.secondary"
-                            sx={{ color: "#aaa", whiteSpace: "nowrap" }}
+                            sx={{
+                                color: "#aaa",
+                                whiteSpace: "nowrap",
+                                fontSize: "12px",
+                            }}
                         >
                             Matrícula
                         </Typography>
@@ -145,7 +147,6 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                                 fontWeight: 600,
                                 fontSize: "16px",
                                 letterSpacing: 0,
-                                textAlign: "center",
                                 whiteSpace: "nowrap",
                             }}
                         >
@@ -153,12 +154,23 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                         </Typography>
                     </Grid>
 
-                    <Grid size={{ xs: 6, md: 1.5, sm:3 }}>
+                    <Grid
+                        size={{ xs: 6, md: 1.5, sm: 3 }}
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                    >
                         <Typography
                             variant="caption"
                             color="text.secondary"
-                            alignContent={"center"}
-                            sx={{ color: "#aaa", whiteSpace: "nowrap" }}
+                            sx={{
+                                color: "#aaa",
+                                whiteSpace: "nowrap",
+                                fontSize: "12px",
+                            }}
                         >
                             Data
                         </Typography>
@@ -179,7 +191,7 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                     </Grid>
 
                     {showBalance && (
-                        <Grid size={{ xs: 6, md: 2, sm:3 }}>
+                        <Grid size={{ xs: 6, md: 2, sm: 3 }}>
                             <Typography
                                 variant="caption"
                                 color="text.secondary"
