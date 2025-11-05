@@ -1,4 +1,4 @@
-import { Box, Alert, Snackbar } from "@mui/material";
+import { Alert, Snackbar } from "@mui/material";
 
 interface ErrorAlertProps {
     error: boolean;
