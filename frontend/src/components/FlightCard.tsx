@@ -35,8 +35,14 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                     color: "white",
                 }}
             >
-                <Grid container spacing={6} justifyContent="space-between">
-                    <Grid size={2}>
+                <Grid
+                    container
+                    spacing={{ xs: 2, md: 4 }}
+                    justifyContent={{ xs: "flex-start", md: "space-between" }}
+                    columns={{md:12, xs:12} }
+                    
+                >
+                    <Grid size={{ xs: 12, md: 3, sm: 12}}>
                         <Typography
                             sx={{
                                 fontFamily: "Manrope",
@@ -58,7 +64,7 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                             {flight.aircraft.airline}
                         </Typography>
                     </Grid>
-                    <Grid size={2}>
+                    <Grid size={{ xs: 6, md: 4, sm: 3 }}>
                         <Stack alignItems="center">
                             <Typography
                                 variant="caption"
@@ -73,58 +79,59 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                             >
                                 Trajeto
                             </Typography>
+                            <Stack>
+                                <Stack
+                                    direction="row"
+                                    alignItems="center"
+                                    spacing={0}
+                                >
+                                    <CircleIcon
+                                        sx={{ fontSize: 16, color: "#f1c40f" }}
+                                    />
+                                    <Box
+                                        sx={{
+                                            height: 4,
+                                            backgroundColor: "#f1c40f",
+                                            minWidth: { md: 100, xs: 70 },
+                                            borderRadius: 2,
+                                        }}
+                                    />
+                                    <CircleIcon
+                                        sx={{ fontSize: 16, color: "#f1c40f" }}
+                                    />
+                                </Stack>
 
-                            <Stack
-                                direction="row"
-                                alignItems="center"
-                                spacing={0}
-                            >
-                                <CircleIcon
-                                    sx={{ fontSize: 16, color: "#f1c40f" }}
-                                />
-                                <Box
+                                <Stack
+                                    direction="row"
+                                    alignItems="center"
                                     sx={{
-                                        height: 4,
-                                        backgroundColor: "#f1c40f",
-                                        minWidth: 100,
-                                        borderRadius: 2,
+                                        mt: 0.5,
+                                        width: "100%",
+                                        justifyContent: "space-between",
+                                        px: "2px",
                                     }}
-                                />
-                                <CircleIcon
-                                    sx={{ fontSize: 16, color: "#f1c40f" }}
-                                />
-                            </Stack>
-
-                            <Stack
-                                direction="row"
-                                alignItems="center"
-                                sx={{
-                                    mt: 0.5,
-                                    width: "100%",
-                                    justifyContent: "space-between",
-                                    px: "2px",
-                                }}
-                            >
-                                <Typography
-                                    sx={{ color: "#fff", lineHeight: 1 }}
-                                    fontWeight={400}
-                                    fontFamily={"Manrope"}
-                                    fontSize={16}
                                 >
-                                    {flight.flightData.route.from}
-                                </Typography>
-                                <Typography
-                                    sx={{ color: "#fff", lineHeight: 1 }}
-                                    fontWeight={400}
-                                    fontFamily={"Manrope"}
-                                    fontSize={16}
-                                >
-                                    {flight.flightData.route.to}
-                                </Typography>
+                                    <Typography
+                                        sx={{ color: "#fff", lineHeight: 1 }}
+                                        fontWeight={400}
+                                        fontFamily={"Manrope"}
+                                        fontSize={16}
+                                    >
+                                        {flight.flightData.route.from}
+                                    </Typography>
+                                    <Typography
+                                        sx={{ color: "#fff", lineHeight: 1 }}
+                                        fontWeight={400}
+                                        fontFamily={"Manrope"}
+                                        fontSize={16}
+                                    >
+                                        {flight.flightData.route.to}
+                                    </Typography>
+                                </Stack>
                             </Stack>
                         </Stack>
                     </Grid>
-                    <Grid size={1}>
+                    <Grid size={{ xs: 6, md: 1.5, sm:3 }}>
                         <Typography
                             variant="caption"
                             color="text.secondary"
@@ -146,13 +153,7 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                         </Typography>
                     </Grid>
 
-                    <Grid
-                        size={2}
-                        display="flex"
-                        justifyContent="center"
-                        alignItems="center"
-                        flexDirection="column"
-                    >
+                    <Grid size={{ xs: 6, md: 1.5, sm:3 }}>
                         <Typography
                             variant="caption"
                             color="text.secondary"
@@ -178,13 +179,7 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                     </Grid>
 
                     {showBalance && (
-                        <Grid
-                            size={1.5}
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            flexDirection="column"
-                        >
+                        <Grid size={{ xs: 6, md: 2, sm:3 }}>
                             <Typography
                                 variant="caption"
                                 color="text.secondary"

@@ -9,7 +9,6 @@ export const SectionHeader = () => {
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                mb: 3,
             }}
         >
             <Typography

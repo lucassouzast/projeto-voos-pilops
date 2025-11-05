@@ -39,7 +39,15 @@ export const Flights = () => {
             <Box sx={{ maxWidth: "1200px", mx: "auto", px: 2 }}>
                 <PilopsLogo />
                 <div>
-                    <Box display={"flex"} justifyContent={"space-between"}>
+                    <Box
+                        display={"flex"}
+                        sx={{
+                            mb: 3,
+                            flexDirection: { xs: "column", sm: "row" },
+                            alignItems: { xs: "flex-start", sm: "center" },
+                            justifyContent: { sm: "space-between" },
+                        }}
+                    >
                         <SectionHeader />
                         <FlightBalance />
                     </Box>
