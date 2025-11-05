@@ -41,6 +41,7 @@ export const FlightBalance = () => {
                     width: { sm: "250px" },
                     px: { xs: 2.5, sm: 0 },
                     ml: 0.5,
+                    py:1
                 }}
             >
                 <div>

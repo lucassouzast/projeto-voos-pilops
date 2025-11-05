@@ -15,5 +15,6 @@ export const getFlights = async (page: number) => {
         return response.data;
     } catch (error) {
         console.error("Erro ao buscar voos:", error);
+        throw error;
     }
 };

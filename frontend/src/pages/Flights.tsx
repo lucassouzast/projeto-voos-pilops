@@ -5,32 +5,35 @@ import type { Flight } from "../types/flight";
 import { SectionHeader } from "../components/SectionHeader";
 import { Box, ButtonBase, Pagination, Skeleton } from "@mui/material";
 
-import { getFlights} from "../services/flightServices";
-
+import { getFlights } from "../services/flightServices";
 
 import { useNavigate } from "react-router-dom";
 import { FlightBalance } from "../components/FlightBalance";
+import { ErrorAlert } from "../components/ErrorAlert";
 
 export const Flights = () => {
     const [flightsList, setFlightsList] = useState<Flight[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [loading, setLoading] = useState(true);
+
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
 
     const navigate = useNavigate();
 
-    const [loading, setLoading] = useState(true);
 
-    const fetchFlights  = async (page: number) => {
+    const fetchFlights = async (page: number) => {
         setLoading(true);
         try {
             const flightsData = await getFlights(page);
             setFlightsList(flightsData.flights);
-            console.log(flightsData);
             setTotalPages(flightsData.totalPages);
             setLoading(false);
         } catch (error) {
-            console.error(error);
             setLoading(false);
+            setError(true);
+            setErrorMessage("Não foi possível carregar os voos no momento.");
         }
     };
 
@@ -38,8 +41,14 @@ export const Flights = () => {
         fetchFlights(currentPage);
     }, [currentPage]);
 
+
     return (
         <>
+            <ErrorAlert
+                error={error}
+                onClose={() => setError(false)}
+                message={errorMessage}
+            />
             <Box sx={{ maxWidth: "1200px", mx: "auto", px: 2 }}>
                 <PilopsLogo />
                 <div>
