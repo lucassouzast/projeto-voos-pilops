@@ -160,7 +160,7 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
-                            justifyContent: "center",
+                            justifyContent: "flex-start",
                         }}
                     >
                         <Typography
