@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { FlightCard } from "../components/FlightCard";
 import { PilopsLogo } from "../components/PilopsLogo";
 import type { Flight } from "../types/flight";
-import { api } from "../services/api";
 import { SectionHeader } from "../components/SectionHeader";
 import { Box, ButtonBase, Pagination, Skeleton } from "@mui/material";
+
+import { getFlights} from "../services/flightServices";
+
 
 import { useNavigate } from "react-router-dom";
 import { FlightBalance } from "../components/FlightBalance";
@@ -18,20 +20,22 @@ export const Flights = () => {
 
     const [loading, setLoading] = useState(true);
 
-    const getFlights = (page: number) => {
+    const fetchFlights  = async (page: number) => {
         setLoading(true);
-        api.get(`/flights?page=${page}`)
-            .then((response) => {
-                setFlightsList(response.data.flights);
-                setTotalPages(response.data.totalPages);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+        try {
+            const flightsData = await getFlights(page);
+            setFlightsList(flightsData.flights);
+            console.log(flightsData);
+            setTotalPages(flightsData.totalPages);
+            setLoading(false);
+        } catch (error) {
+            console.error(error);
+            setLoading(false);
+        }
     };
 
     useEffect(() => {
-        getFlights(currentPage);
+        fetchFlights(currentPage);
     }, [currentPage]);
 
     return (

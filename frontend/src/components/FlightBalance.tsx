@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
-import { api } from "../services/api";
 import { Box, Typography } from "@mui/material";
+import { getTotalBalance } from "../services/flightServices";
 
 export const FlightBalance = () => {
     const [totalBalance, setTotalBalance] = useState(0);
 
-    const getTotalBalance = async () => {
+    const fetchBalance = async () => {
         try {
-            const response = await api.get("/flights/balance");
-            setTotalBalance(response.data.totalBalance);
+            const balance = await getTotalBalance();
+            setTotalBalance(balance);
         } catch (error) {
-            console.error("Erro ao buscar saldo:", error);
+            console.error(error);
         }
     };
+
     useEffect(() => {
-        getTotalBalance();
+        fetchBalance();
     }, []);
     return (
         <Box
@@ -25,18 +26,17 @@ export const FlightBalance = () => {
                 color: "#fff",
                 borderRadius: 2,
                 maxHeight: "80px",
-                width: {sm:'250px'},
-                px:{xs: 2.5, sm:0},
-                ml:0.5
+                width: { sm: "250px" },
+                px: { xs: 2.5, sm: 0 },
+                ml: 0.5,
             }}
-            
         >
             <div>
                 <Typography variant="overline">Saldo Total</Typography>
                 <Typography
                     variant="h5"
                     component="div"
-                    sx={{ fontWeight: 700,whiteSpace: 'nowrap' }}
+                    sx={{ fontWeight: 700, whiteSpace: "nowrap" }}
                 >
                     {`P$ ${totalBalance.toLocaleString("pt-BR", {
                         minimumFractionDigits: 2,
