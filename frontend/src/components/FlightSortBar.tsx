@@ -30,7 +30,7 @@ export const FlightSortBar = ({
                     fontSize: 14,
                 }}
             >
-                <MenuItem value="none">Relevância</MenuItem>
+                <MenuItem value="none">Ordenar</MenuItem>
                 <MenuItem value="balance">Saldo</MenuItem>
                 <MenuItem value="date">Data</MenuItem>
             </Select>

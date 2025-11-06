@@ -3,7 +3,7 @@ import { FlightCard } from "../components/FlightCard";
 import { PilopsLogo } from "../components/PilopsLogo";
 import type { Flight } from "../types/flight";
 import { SectionHeader } from "../components/SectionHeader";
-import { Box, ButtonBase, Pagination, Skeleton } from "@mui/material";
+import { Box, ButtonBase, Grid, Pagination, Skeleton } from "@mui/material";
 
 import { FlightSortBar } from "../components/FlightSortBar";
 
@@ -20,9 +20,13 @@ export const Flights = () => {
     const [loading, setLoading] = useState(true);
 
     const [error, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+    const [errorMessage, setErrorMessage] = useState<string | undefined>(
+        undefined
+    );
 
-    const [sortType, setSortType] = useState<"none" | "balance" | "date">("none");
+    const [sortType, setSortType] = useState<"none" | "balance" | "date">(
+        "none"
+    );
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
     const navigate = useNavigate();
@@ -64,34 +68,39 @@ export const Flights = () => {
             <Box sx={{ maxWidth: "1147px", mx: "auto", px: 2 }}>
                 <PilopsLogo />
                 <div>
-                    <Box
-                        display={"flex"}
-                        sx={{
-                            mb: 3,
-                            flexDirection: { xs: "column", sm: "row" },
-                            alignItems: { xs: "flex-start", sm: "center" },
-                            justifyContent: { sm: "space-between" },
-                        }}
+                    <Grid
+                        container
+                        justifyContent="space-between"
+                        mb={{ xs: 3, md: 1 }}
                     >
-                        <SectionHeader />
-                        <FlightBalance />
-                    </Box>
-
-                    <FlightSortBar
-                        sortType={sortType}
-                        setSortType={setSortType}
-                        sortOrder={sortOrder}
-                        setSortOrder={setSortOrder}
-                    />
+                        <Grid size={{ md: 6, xs: 12 }}>
+                            <SectionHeader />
+                        </Grid>
+                        <Grid
+                            size={{ md: 6, xs: 6 }}
+                            display={"flex"}
+                            justifyContent={"flex-end"}
+                        >
+                            <FlightBalance />
+                        </Grid>
+                        <Grid size={{ md: 6, xs: 4 }} display={"flex"}>
+                            <FlightSortBar
+                                sortType={sortType}
+                                setSortType={setSortType}
+                                sortOrder={sortOrder}
+                                setSortOrder={setSortOrder}
+                            />
+                        </Grid>
+                    </Grid>
 
                     {!loading ? (
                         flightsList.length > 0 ? (
                             flightsList.map((flight) => (
-                                <Box sx={{mb:3}}
+                                <Box
+                                    sx={{ mb: 3 }}
                                     key={flight.id}
                                     onClick={() =>
-                                        navigate(`/flights/${flight.id}`,
-                                        {
+                                        navigate(`/flights/${flight.id}`, {
                                             state: flight,
                                         })
                                     }
