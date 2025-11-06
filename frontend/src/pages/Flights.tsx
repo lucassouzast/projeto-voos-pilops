@@ -5,6 +5,8 @@ import type { Flight } from "../types/flight";
 import { SectionHeader } from "../components/SectionHeader";
 import { Box, ButtonBase, Pagination, Skeleton } from "@mui/material";
 
+import { FlightSortBar } from "../components/FlightSortBar";
+
 import { getFlights } from "../services/flightServices";
 
 import { useNavigate } from "react-router-dom";
@@ -20,13 +22,23 @@ export const Flights = () => {
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
 
+    const [sortType, setSortType] = useState<"none" | "balance" | "date">("none");
+    const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+
     const navigate = useNavigate();
 
-
-    const fetchFlights = async (page: number) => {
+    const fetchFlights = async (
+        page: number,
+        sort?: string,
+        order?: string
+    ) => {
         setLoading(true);
         try {
-            const flightsData = await getFlights(page);
+            let query = `?page=${page}`;
+            if (sort && sort !== "none") {
+                query += `&sort=${sort}&order=${order}`;
+            }
+            const flightsData = await getFlights(query);
             setFlightsList(flightsData.flights);
             setTotalPages(flightsData.totalPages);
             setLoading(false);
@@ -38,9 +50,8 @@ export const Flights = () => {
     };
 
     useEffect(() => {
-        fetchFlights(currentPage);
-    }, [currentPage]);
-
+        fetchFlights(currentPage, sortType, sortOrder);
+    }, [currentPage, sortType, sortOrder]);
 
     return (
         <>
@@ -49,6 +60,7 @@ export const Flights = () => {
                 onClose={() => setError(false)}
                 message={errorMessage}
             />
+
             <Box sx={{ maxWidth: "1147px", mx: "auto", px: 2 }}>
                 <PilopsLogo />
                 <div>
@@ -65,13 +77,21 @@ export const Flights = () => {
                         <FlightBalance />
                     </Box>
 
+                    <FlightSortBar
+                        sortType={sortType}
+                        setSortType={setSortType}
+                        sortOrder={sortOrder}
+                        setSortOrder={setSortOrder}
+                    />
+
                     {!loading ? (
                         flightsList.length > 0 ? (
                             flightsList.map((flight) => (
                                 <Box sx={{mb:3}}
                                     key={flight.id}
                                     onClick={() =>
-                                        navigate(`/flights/${flight.id}`, {
+                                        navigate(`/flights/${flight.id}`,
+                                        {
                                             state: flight,
                                         })
                                     }

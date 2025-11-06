@@ -10,9 +10,9 @@ export const getTotalBalance = async () => {
     }
 };
 
-export const getFlights = async (page: number) => {
+export const getFlights = async (query: string) => {
     try {
-        const response = await api.get(`/flights?page=${page}`);
+        const response = await api.get(`/flights${query}`);
         return response.data;
     } catch (error) {
         console.error("Erro ao buscar voos:", error);
