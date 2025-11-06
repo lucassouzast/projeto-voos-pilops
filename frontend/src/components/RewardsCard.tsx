@@ -63,7 +63,11 @@ export const RewardsCard = ({ flight }: FlightCardProps) => {
                             justifyContent={{ xs: "center", md: "flex-start" }}
                         >
                             <img src={PilopsCoin} alt="Pilops Coin" />
-                            <Box display="flex" flexDirection="column" ml={{xs:1, sm:2}}>
+                            <Box
+                                display="flex"
+                                flexDirection="column"
+                                ml={{ xs: 1, sm: 2 }}
+                            >
                                 <Typography
                                     sx={{
                                         fontFamily: "Manrope, sans-serif",
@@ -104,7 +108,8 @@ export const RewardsCard = ({ flight }: FlightCardProps) => {
                             </Box>
                         </Box>
                     </Grid>
-                    <Grid size={{ xs: 6, sm: 6, md: 4 }}
+                    <Grid
+                        size={{ xs: 6, sm: 6, md: 4 }}
                         display={"flex"}
                         justifyContent={"center"}
                     >
@@ -113,7 +118,11 @@ export const RewardsCard = ({ flight }: FlightCardProps) => {
                             justifyContent={{ xs: "center", md: "flex-start" }}
                         >
                             <img src={StarShine} />
-                            <Box display="flex" flexDirection="column" ml={{xs:1, sm:2}}>
+                            <Box
+                                display="flex"
+                                flexDirection="column"
+                                ml={{ xs: 1, sm: 2 }}
+                            >
                                 <Typography
                                     variant="body2"
                                     color="text.secondary"
@@ -147,7 +156,8 @@ export const RewardsCard = ({ flight }: FlightCardProps) => {
                             </Box>
                         </Box>
                     </Grid>
-                    <Grid size={{ xs: 6, sm: 6, md: 4 }}
+                    <Grid
+                        size={{ xs: 6, sm: 6, md: 4 }}
                         display={"flex"}
                         justifyContent={"center"}
                     >
@@ -157,14 +167,18 @@ export const RewardsCard = ({ flight }: FlightCardProps) => {
                         >
                             <img src={AwardStar} />
 
-                            <Box display="flex" flexDirection="column" ml={{xs:1, sm:2}}>
+                            <Box
+                                display="flex"
+                                flexDirection="column"
+                                ml={{ xs: 1, sm: 2 }}
+                            >
                                 <Typography
                                     variant="body2"
                                     color="text.secondary"
                                     sx={{
                                         fontFamily: "Manrope",
                                         fontWeight: 400,
-                                        fontSize: {xs:12, md:14},
+                                        fontSize: { xs: 12, md: 14 },
                                         lineHeight: "140%",
                                         letterSpacing: 0,
                                         color: "#E0E0E0",

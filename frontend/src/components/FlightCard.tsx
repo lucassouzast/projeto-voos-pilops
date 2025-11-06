@@ -1,5 +1,6 @@
 import { Box, Typography, Card, Stack, Grid } from "@mui/material";
 import type { Flight } from "../types/flight";
+import { parseISO, format } from "date-fns";
 import CircleIcon from "@mui/icons-material/Circle";
 
 const textBase = {
@@ -20,7 +21,6 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                mb: 3,
             }}
         >
             <Card
@@ -49,6 +49,8 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                                 lineHeight: "140%",
                                 letterSpacing: 0,
                                 whiteSpace: "nowrap",
+                                textAlign:{xs: 'center', sm: 'left'}
+
                             }}
                         >
                             {flight.aircraft.name}
@@ -58,11 +60,12 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                             variant="body2"
                             color="text.secondary"
                             sx={{ color: "#aaa" }}
+                            textAlign={{xs: 'center', sm: 'left'}}
                         >
                             {flight.aircraft.airline}
                         </Typography>
                     </Grid>
-                    <Grid size={{ xs: 6, md: 4, sm: 3 }}>
+                    <Grid size={{ xs: 6, md: 1, sm: 3 }}>
                         <Stack alignItems="center">
                             <Typography
                                 variant="caption"
@@ -180,13 +183,12 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                                 fontWeight: 600,
                             }}
                         >
-                            {new Date(
-                                flight.flightData.date
-                            ).toLocaleDateString("pt-BR", {
-                                day: "2-digit",
-                                month: "2-digit",
-                                year: "numeric",
-                            })}
+                            {flight.flightData.date
+                                ? format(
+                                      parseISO(flight.flightData.date),
+                                      "dd/MM/yyyy"
+                                  )
+                                : ""}
                         </Typography>
                     </Grid>
 
