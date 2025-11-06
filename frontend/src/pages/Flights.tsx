@@ -49,7 +49,7 @@ export const Flights = () => {
                 onClose={() => setError(false)}
                 message={errorMessage}
             />
-            <Box sx={{ maxWidth: "1200px", mx: "auto", px: 2 }}>
+            <Box sx={{ maxWidth: "1147px", mx: "auto", px: 2 }}>
                 <PilopsLogo />
                 <div>
                     <Box
@@ -68,7 +68,7 @@ export const Flights = () => {
                     {!loading ? (
                         flightsList.length > 0 ? (
                             flightsList.map((flight) => (
-                                <div
+                                <Box sx={{mb:3}}
                                     key={flight.id}
                                     onClick={() =>
                                         navigate(`/flights/${flight.id}`, {
@@ -78,6 +78,7 @@ export const Flights = () => {
                                     style={{ cursor: "pointer" }}
                                 >
                                     <ButtonBase
+                                        data-testid={`flight-card-${flight.id}`}
                                         sx={{
                                             width: "100%",
                                             display: "block",
@@ -86,7 +87,7 @@ export const Flights = () => {
                                     >
                                         <FlightCard flight={flight} />
                                     </ButtonBase>
-                                </div>
+                                </Box>
                             ))
                         ) : (
                             <Box textAlign="center" py={5} color="gray">
