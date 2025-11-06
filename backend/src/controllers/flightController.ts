@@ -53,7 +53,7 @@ export const getAllFlights  = (req: Request, res: Response) => {
             totalPages,
             flights: flightsPage});
     } catch (error) {
-        return res.status(500).json({ message: 'Erro ao carregar voos.' });
+        return res.status(400).json({ message: 'Erro ao carregar voos.' });
     }
 };
 
@@ -67,7 +67,7 @@ export const getFlightById = (req: Request, res: Response) => {
         } 
         return res.status(200).json({flightById});
     } catch (error) {
-        return res.status(500).json({ message: 'Erro ao carregar voo.' });
+        return res.status(400).json({ message: 'Erro ao carregar voo.' });
     }
         }
 
