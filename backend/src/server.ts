@@ -3,7 +3,7 @@ import helmet from 'helmet';
 import flightsRoutes from './routes/flightsRoutes.js';
 import cors from 'cors';
 
-import { swaggerUiMiddleware, swaggerUiSetup } from './swagger';
+import { swaggerUiMiddleware, swaggerUiSetup } from './swagger.js';
 
 
 const server = express();
