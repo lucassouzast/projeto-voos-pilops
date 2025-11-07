@@ -40,7 +40,7 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                     spacing={{ xs: 2, md: showBalance ? 4 : 16 }}
                     justifyContent={{ xs: "flex-start", md: "space-between" }}
                 >
-                    <Grid size={{ xs: showBalance ? 12 : 6, md :3, sm: 12 }}>
+                    <Grid size={{ xs: showBalance ? 12 : 6, md: 3, sm: 12 }}>
                         <Typography
                             sx={{
                                 fontFamily: "Manrope",
@@ -49,8 +49,7 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                                 lineHeight: "140%",
                                 letterSpacing: 0,
                                 whiteSpace: "nowrap",
-                                textAlign:{xs: 'center', sm: 'left'}
-
+                                textAlign: { xs: "center", sm: "left" },
                             }}
                         >
                             {flight.aircraft.name}
@@ -60,12 +59,12 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                             variant="body2"
                             color="text.secondary"
                             sx={{ color: "#aaa" }}
-                            textAlign={{xs: 'center', sm: 'left'}}
+                            textAlign={{ xs: "center", sm: "left" }}
                         >
                             {flight.aircraft.airline}
                         </Typography>
                     </Grid>
-                    <Grid size={{ xs: 6, md: showBalance ? 1.5 :2, sm: 3 }}>
+                    <Grid size={{ xs: 6, md: showBalance ? 1.5 : 2, sm: 3 }}>
                         <Stack alignItems="center">
                             <Typography
                                 variant="caption"
@@ -132,7 +131,15 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                             </Stack>
                         </Stack>
                     </Grid>
-                    <Grid size={{ xs: 6, md: showBalance ? 2 :2, sm: 3 }}>
+                    <Grid
+                        size={{ xs: 6, md: showBalance ? 2 : 2, sm: 3 }}
+                        sx={{
+                            justifyContent: { md: "flex-start", xs: "center" },
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                        }}
+                    >
                         <Typography
                             variant="caption"
                             color="text.secondary"
@@ -157,7 +164,8 @@ export const FlightCard = ({ flight, showBalance = true }: FlightCardProps) => {
                         </Typography>
                     </Grid>
 
-                    <Grid size={{ xs: 6, md:  showBalance  ? 2 : 3,  sm: 3 }}
+                    <Grid
+                        size={{ xs: 6, md: showBalance ? 2 : 3, sm: 3 }}
                         sx={{
                             display: "flex",
                             flexDirection: "column",
