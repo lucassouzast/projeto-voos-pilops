@@ -14,7 +14,7 @@ export const FlightSortBar = ({
     sortOrder,
     setSortOrder,
 }: FlightSortBarProps) => (
-    <Box display="flex" alignItems="center" gap={2} sx={{ mb: 2 }}>
+    <Box display="flex" alignItems="center" flexDirection={{xs: "column", md: "row"}}gap={2}>
         <FormControl sx={{ minWidth: 120 }}>
             <Select
                 value={sortType}
@@ -48,6 +48,7 @@ export const FlightSortBar = ({
                     bgcolor: "primary.main",
                     color: "white",
                     borderRadius: 1,
+                    width: {xs: '120px', md: "auto"},
                 }}
             >
                 {sortOrder === "asc" ? "Ascendente" : "Decrescente"}

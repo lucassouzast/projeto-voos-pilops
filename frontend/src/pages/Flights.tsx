@@ -83,7 +83,7 @@ export const Flights = () => {
                         >
                             <FlightBalance />
                         </Grid>
-                        <Grid size={{ md: 6, xs: 4 }} display={"flex"}>
+                        <Grid size={{ md: 6, xs: 4 }} display={"flex"} alignItems={"flex-start"}>
                             <FlightSortBar
                                 sortType={sortType}
                                 setSortType={setSortType}
